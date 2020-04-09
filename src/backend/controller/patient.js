@@ -19,13 +19,13 @@ const create = (req, res) =>
         .then(
             () =>
             {
-                res.json({message: "User created successfully"});
+                res.json({message: "Patient created successfully"});
             })
         .catch(
             (err) =>
             {
                 if(err.code === 11000)
-                    res.status(400).json({message: "User already exists"});
+                    res.status(400).json({message: "Patient already exists"});
                 else
                     res.status(500).json(common.errorResponse(err));
             });
@@ -34,7 +34,28 @@ const create = (req, res) =>
 
 const fetch = (req, res) =>
 {
-    
+    const user = jwt.decode(req.headers.authorization).payload;
+
+    patient
+        .Patient
+        .find({user_id: user.id})
+        .then(
+            (result) =>
+            {
+                if(result)
+                {
+                    res.json({patients: result});
+                }
+                else
+                {
+                    res.status(404).json({message: "Patient not found"});
+                }
+            })
+        .catch(
+            (err) =>
+            {
+                res.status(500).json(common.errorResponse(err));
+            });
 };
 
 
