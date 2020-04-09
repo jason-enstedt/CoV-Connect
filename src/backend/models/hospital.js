@@ -11,4 +11,4 @@ const Hospital = new Schema(
     { timestamps: true }
 );
 
-module.exports = { Hospital: mongoose.model("Hospital", Hospital) };
+module.exports = { Hospital : mongoose.model("Hospital", Hospital) };

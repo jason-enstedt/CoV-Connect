@@ -4,24 +4,27 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 
-const SERVER_HOST = process.env.SERVER_HOST;
-const SERVER_PORT = parseInt(process.env.SERVER_PORT);
-const MONGO_HOST = process.env.MONGO_HOST;
-const MONGO_PORT = parseInt(process.env.MONGO_PORT);
-const MONGO_USER = process.env.MONGO_USER;
-const MONGO_PASS = process.env.MONGO_PASSWORD;
-const MONGO_DBNAME = process.env.MONGO_DBNAME;
-const SECRET = process.env.JWT_SECRET;
+const SERVER_HOST = process.env.hasOwnProperty("SERVER_HOST") ? process.env.SERVER_HOST : "localhost";
+const SERVER_PORT = process.env.hasOwnProperty("SERVER_PORT") ? parseInt(process.env.SERVER_PORT) : 8080;
+const MONGO_HOST = process.env.hasOwnProperty("MONGO_HOST") ? process.env.MONGO_HOST : "localhost";
+const MONGO_PORT = process.env.hasOwnProperty("MONGO_PORT") ? parseInt(process.env.MONGO_PORT) : 27017;
+const MONGO_USER = process.env.hasOwnProperty("MONGO_USER") ? process.env.MONGO_USER : "admin";
+const MONGO_PASS = process.env.hasOwnProperty("MONGO_PASSWORD") ? process.env.MONGO_PASSWORD : "admin";
+const MONGO_DBNAME = process.env.hasOwnProperty("MONGO_DBNAME") ? process.env.MONGO_DBNAME : "covconnect";
+const SECRET = process.env.hasOwnProperty("JWT_SECRET") ? process.env.JWT_SECRET : "thisisasecret";
 
+const common = require("./controller/common");
+common.setSecret(SECRET);
 
 const dbRoute = "mongodb://" + MONGO_USER + ":" + MONGO_PASS + "@" + MONGO_HOST + ":" + MONGO_PORT + "/" + MONGO_DBNAME;
-mongoose.connect(dbRoute, {useNewUrlParser: true});
+mongoose.connect(dbRoute, {useUnifiedTopology: true, useNewUrlParser: true, 'useCreateIndex': true});
 
 let db = mongoose.connection;
 db.once("open", () => console.log("Connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const app = express();
+
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());

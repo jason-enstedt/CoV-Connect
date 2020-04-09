@@ -7,7 +7,7 @@ const hospital = require("../models/hospital");
 
 const create = (req, res) =>
 {
-    const user = jwt.decode(req.headers.authorization).payload;
+    const user = common.fetchPayloadFromToken(req);
 
     if(user.type != "admin")
     {

@@ -3,12 +3,12 @@ const jwt = require("jsonwebtoken");
 
 
 const common = require("./common");
-const user = require("../models/user");
+const userModel = require("../models/user");
 
 
 const create = (req, res) =>
 {
-    let user = user.User();
+    let user = userModel.User();
     user.name = req.body.name;
     user.email = req.body.email;
     user.dob = req.body.dob;
@@ -36,34 +36,38 @@ const login = (req, res) =>
     let email = req.body.email;
     let password = req.body.password;
 
-    user.User
-             .findOne({email: email})
-             .then(
-                 (result) =>
-                 {
-                     if(result)
-                     {
-                         if(bcrypt.compareSync(password, result.passhash))
-                         {
-                             const token = jwt.sign(result, common.fetchSecret(),
-                                                    {expiresIn: "24h"});
-                             res.json({message: "User authenticated successfully", token: token});
-                         }
-                         else
-                         {
-                             res.status(401).json({message: "Unauthenticated"});
-                         }
-                     }
-                     else
-                     {
-                         res.status(404).json({message: "User not found."});
-                     }
-                 })
-             .catch(
-                 (err) =>
-                 {
-                     res.status(500).json(common.errorResponse(err));
-                 });
+    userModel
+        .User
+        .findOne({email: email})
+        .then(
+            (result) =>
+            {
+                if(result)
+                {
+                    if(bcrypt.compareSync(password, result.passhash))
+                    {
+                        const token = jwt.sign({id: result._id, email: result.email,
+                                                   name: result.name, dob: result.dob,
+                                                   type: result.type},
+                                               common.fetchSecret(),
+                                               {expiresIn: "24h"});
+                        res.json({message: "User authenticated successfully", token: token});
+                    }
+                    else
+                    {
+                        res.status(401).json({message: "Unauthenticated"});
+                    }
+                }
+                else
+                {
+                    res.status(404).json({message: "User not found."});
+                }
+            })
+        .catch(
+            (err) =>
+            {
+                res.status(500).json(common.errorResponse(err));
+            });
 };
 
 
