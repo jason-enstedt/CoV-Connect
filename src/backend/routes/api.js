@@ -94,4 +94,12 @@ module.exports = function(app)
         {
             messageController.fetch(req, res);
         });
+
+    app.delete(
+        '/message/delete',
+        authenticateJWT,
+        (req, res) =>
+        {
+            messageController.deleteMessages(req, res);
+        });
 };

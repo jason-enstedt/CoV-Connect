@@ -11,6 +11,10 @@ const create = (req, res) =>
     message.patient_id = req.body.patient_id;
     message.message = req.body.message;
 
+    if(user.type == "blocked"){
+        res.status(405).json({message: "User not allowed to send messages"});
+    }
+
     message
         .save()
         .then(
@@ -62,7 +66,30 @@ const fetch = (req, res) =>
 
 const deleteMessages = (req, res) =>
 {
+    const user = common.fetchPayloadFromToken(req);
 
+    if(user.type != "admin")
+    {
+        res.status(405).json({message: "Operation not allowed"});
+    }
+
+    message
+        .Message
+        .find({id: req.body.id})
+        .then(
+            (result) =>
+            {
+                if (result){
+                    result.remove();
+                    res.json({message: "Message deleted successfully."})
+                }
+                else
+                {
+                    res.status(404).json({message: "Messages not found"});
+                }
+            }
+
+        )
 };
 
 
