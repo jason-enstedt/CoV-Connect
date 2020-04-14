@@ -34,7 +34,7 @@ module.exports = function(app)
     };
 
     app.put(
-        '/user/create',
+        '/user/register',
         (req, res) =>
         {
             userController.create(req, res);

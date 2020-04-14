@@ -2,20 +2,20 @@ const jwt = require("jsonwebtoken");
 
 
 const common = require("./common");
-const hospital = require("../models/hospital");
+const hospitalModel = require("../models/hospital");
 
 
 const create = (req, res) =>
 {
     const user = common.fetchPayloadFromToken(req);
 
-    if(user.type != "admin")
+    /*if(user.type != "admin")
     {
         res.status(401).json({message: "Unathorized access"});
         return;
-    }
+    }*/
 
-    let hospital = hospital.Hospital();
+    let hospital = hospitalModel.Hospital();
     hospital.name = req.body.name;
     hospital.address = req.body.address;
 
@@ -38,7 +38,7 @@ const create = (req, res) =>
 
 const fetch = (req, res) =>
 {
-    hospital
+    hospitalModel
         .Hospital
         .find()
         .then(
@@ -46,7 +46,16 @@ const fetch = (req, res) =>
             {
                 if(result)
                 {
-                    res.json({hospitals: result});
+                    let hospitals = [];
+
+                    result.forEach(
+                        (hospital) =>
+                        {
+                            hospitals.push({id: hospital.id, name: hospital.name,
+                                               address: hospital.address})
+                        });
+
+                    res.json({hospitals: hospitals});
                 }
                 else
                 {

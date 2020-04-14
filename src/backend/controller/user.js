@@ -11,7 +11,6 @@ const create = (req, res) =>
     let user = userModel.User();
     user.name = req.body.name;
     user.email = req.body.email;
-    user.dob = req.body.dob;
     user.passhash = bcrypt.hashSync(req.body.password, 10);
 
     user.save()

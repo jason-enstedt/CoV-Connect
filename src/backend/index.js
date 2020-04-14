@@ -1,22 +1,17 @@
+const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-
-const SERVER_HOST = process.env.hasOwnProperty("SERVER_HOST") ? process.env.SERVER_HOST : "localhost";
-const SERVER_PORT = process.env.hasOwnProperty("SERVER_PORT") ? parseInt(process.env.SERVER_PORT) : 8080;
-const MONGO_HOST = process.env.hasOwnProperty("MONGO_HOST") ? process.env.MONGO_HOST : "localhost";
-const MONGO_PORT = process.env.hasOwnProperty("MONGO_PORT") ? parseInt(process.env.MONGO_PORT) : 27017;
-const MONGO_USER = process.env.hasOwnProperty("MONGO_USER") ? process.env.MONGO_USER : "admin";
-const MONGO_PASS = process.env.hasOwnProperty("MONGO_PASSWORD") ? process.env.MONGO_PASSWORD : "admin";
-const MONGO_DBNAME = process.env.hasOwnProperty("MONGO_DBNAME") ? process.env.MONGO_DBNAME : "covconnect";
-const SECRET = process.env.hasOwnProperty("JWT_SECRET") ? process.env.JWT_SECRET : "thisisasecret";
+const config = JSON.parse(fs.readFileSync("./config/config.json"));
 
 const common = require("./controller/common");
-common.setSecret(SECRET);
+common.setSecret(config.secret);
 
-const dbRoute = "mongodb://" + MONGO_USER + ":" + MONGO_PASS + "@" + MONGO_HOST + ":" + MONGO_PORT + "/" + MONGO_DBNAME;
+const dbRoute = "mongodb://" + config.database.username + ":" + config.database.password + "@" +
+                config.database.host + ":" + config.database.port + "/" + config.database.database;
+
 mongoose.connect(dbRoute, {useUnifiedTopology: true, useNewUrlParser: true, 'useCreateIndex': true});
 
 let db = mongoose.connection;
@@ -29,11 +24,14 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-require("./routes/api")(app, SECRET);
+require("./routes/api")(app);
 
 app.listen(
-    SERVER_PORT, SERVER_HOST,
+    config.server.port, config.server.host,
         () =>
         {
-            console.log("Listening on host: " + SERVER_HOST + " and port: " + SERVER_PORT)
+            console.log("Listening on host: " + config.server.host +
+                        " and port: " + config.server.port);
         });
+
+module.exports = app;

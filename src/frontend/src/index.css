@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.bm-burger-button {
+  position: fixed;
+  width: 30px;
+  height: 25px;
+  left: 26px;
+  top: 16px;
+}
+
+.bm-burger-bars {
+  background: #bdc3c7;
+}
+
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+.bm-cross {
+  background: #bdc3c7;
+}
+
+.bm-menu {
+  background: #bdc3c7;
+  font-size: 1.15em;
+}
+
+.bm-item {
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 25px;
+  color: #282c34;
+  transition: color 0.2s;
+  font-family: monospace;
+}
+
+.bm-item:hover {
+  color: white;
+}
+
+.menu-item {
+  outline: none;
+}
+
+.menu-item:hover {
+  background-color: transparent;
+}
+
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+.bm-item-list {
+  color: #282c34;
+  background: #d1d1d1;
+}
+
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+

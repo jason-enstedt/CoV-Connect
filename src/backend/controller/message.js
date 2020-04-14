@@ -1,12 +1,12 @@
 const common = require("./common");
-const message = require("../models/message");
+const messageModel = require("../models/message");
 
 
 const create = (req, res) =>
 {
     const user = common.fetchPayloadFromToken(req);
 
-    let message = message.Message();
+    let message = messageModel.Message();
     message.user_id = user.id;
     message.patient_id = req.body.patient_id;
     message.message = req.body.message;
@@ -41,7 +41,7 @@ const fetch = (req, res) =>
     if(req.body.hasOwnProperty("patient_id"))
         query["patient_id"] = req.body.patient_id;
 
-    message
+    messageModel
         .Message
         .find(query)
         .then(
@@ -73,7 +73,7 @@ const deleteMessages = (req, res) =>
         res.status(405).json({message: "Operation not allowed"});
     }
 
-    message
+    messageModel
         .Message
         .find({id: req.body.id})
         .then(

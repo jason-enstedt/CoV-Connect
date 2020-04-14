@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const Hospital = new Schema(
     {
         name: {type: String, required: true},
-        Address: {type: String, required: true},
+        address: {type: String, required: true},
         status: {type: Number, default: 1}
     },
     { timestamps: true }

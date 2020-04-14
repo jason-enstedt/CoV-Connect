@@ -10,8 +10,8 @@ const create = (req, res) =>
     const user = common.fetchPayloadFromToken(req);
 
     let patient = patientModel.Patient();
-    patient.name = req.body.patient_details.name;
-    patient.dob = req.body.patient_details.dob;
+    patient.name = req.body.name;
+    patient.dob = req.body.dob;
     patient.user_id = user.id;
     patient.hospital_id = req.body.hospital_id;
 
@@ -48,11 +48,12 @@ const fetch = (req, res) =>
                     result.forEach(
                         (patient) =>
                         {
-                            patients.push({id: patient.id,
-                                              patient_details:
-                                                  {name: patient.name, dob: patient.dob},
-                                              user_id: patient.user_id,
-                                              hospital_id: patient.hospital_id})
+                        patients.push({patient_details:
+                                {
+                                    id: patient.id,
+                                    name: patient.name,
+                                    dob: patient.dob
+                                }, user_id: patient.user_id, hospital_id: patient.hospital_id})
                         });
                     res.json({patients: patients});
                 }

@@ -7,7 +7,7 @@ const User = new Schema(
         name: {type: String, required: true},
         email: {type: String, unique: true, required: true},
         passhash: {type: String, required: true},
-        dob: {type: Number, required: true},
+        dob: {type: Number},
         type: {type: String, required: true, default: "user"},
         status: {type: Number, default: 1}
     },

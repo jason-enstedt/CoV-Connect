@@ -1,0 +1,17 @@
+{
+  "server":
+  {
+    "host": "localhost",
+    "port": 8080
+  },
+  "database":
+  {
+    "type": "mongodb",
+    "host": "localhost",
+    "port": 27017,
+    "username": "chaitanya",
+    "password": "chaitanya",
+    "database": "covconnect"
+  },
+  "secret": "4d6912eb-df5e-4122-b5e0-2c99025dc222"
+}

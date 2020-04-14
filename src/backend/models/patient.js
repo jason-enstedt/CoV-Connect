@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const Patient = new Schema(
     {
         name: {type: String, required: true},
-        dob: {type: Number, required: true},
+        dob: {type: Date, required: true},
         hospital_id: {type: String, required: true},
         user_id: {type: String, required: true},
         status: {type: Number, default: 1}
