@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import classnames from "classnames";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-
 
 class aboutUs extends Component
 {
@@ -19,7 +17,6 @@ class aboutUs extends Component
     render()
     {
         const { user } = this.props.auth;
-        const { errors } = this.state;
 
         return (
             <div style={{ height: "75vh" }} className="container valign-wrapper">

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
@@ -25,7 +25,7 @@ axios.defaults.validateStatus = (status) =>
 
 
 // Check for token to keep user logged in
-if (localStorage.jwtToken)
+if (localStorage.jwtToken && localStorage.jwtToken !== "undefined")
 {
     // Set auth token header auth
     const token = localStorage.jwtToken;

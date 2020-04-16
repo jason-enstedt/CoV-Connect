@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, HashRouter, Redirect } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -40,7 +40,7 @@ class Dashboard extends Component
                 </div>
                 <div style={{ height: "75vh" }} className="container valign-wrapper">
                     <div className="row">
-                        <Route path="/dashboard" component={dashboardButtons}/>
+                        <Route exact path="/" component={dashboardButtons}/>
                         <Route path="/sendMessage" component={sendMessage}/>
                         <Route path="/addPatient" component={addPatient}/>
                         <Route path="/aboutUs" component={aboutUs}/>
