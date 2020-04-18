@@ -27,7 +27,7 @@ class aboutUs extends Component
                         </h4>
                         <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                             <h4>
-                                We're just a bunch of people wanting to <b>make a difference</b>
+                                We're just a bunch of people wanting to <b>make a difference.</b>
                             </h4>
                         </div>
                     </div>

@@ -156,7 +156,7 @@ function AddPatient() {
                 />
               </td>
             </table>
-            <label htmlFor="dob">Date of Birth</label>
+            <label htmlFor="dob">Patient's Date of Birth</label>
           </div>
           <div className="col s12" style={{ paddingLeft: "11.250px" }}>
             {/* <button */}

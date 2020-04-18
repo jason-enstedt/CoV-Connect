@@ -10,7 +10,7 @@ function DashboardHome() {
     <div className="center-align">
       <h2 className="blue-text">Welcome back, {_startCase(user.name)}</h2>
 
-      <p className="grey-text">Start composing a message ot a loved one to show how much you care!</p>
+      <p className="grey-text">Start composing a message to a loved one to show how much you care!</p>
 
       <Link
         style={{
