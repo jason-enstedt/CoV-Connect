@@ -8,13 +8,14 @@ import sendMessage from "../pages/sendMessage";
 import addPatient from "../pages/addPatient";
 import aboutUs from "../pages/aboutUs";
 import DashboardHome from "../pages/DashboardHome";
-
+import SentMessages from "../pages/sentMessages";
 
 function Dashboard() {
   const items = [
     { destination: "/sendMessage", label: "Send Message" },
     { destination: "/addPatient", label: "Add Patient" },
     { destination: "/aboutUs", label: "About Us" },
+    { destination: "/sentMessages", label: "Sent Messages"},
   ];
 
   return (
@@ -29,6 +30,7 @@ function Dashboard() {
             <Route path="/sendMessage" component={sendMessage}/>
             <Route path="/addPatient" component={addPatient}/>
             <Route path="/aboutUs" component={aboutUs}/>
+            <Route path="/sentMessages" component={SentMessages} />
           </div>
         </div>
       </div>
