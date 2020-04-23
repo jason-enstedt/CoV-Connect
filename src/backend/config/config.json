@@ -1,17 +1,15 @@
 {
-  "server":
-  {
+  "server": {
     "host": "localhost",
     "port": 8080
   },
-  "database":
-  {
+  "database": {
     "type": "mongodb",
     "host": "localhost",
     "port": 27017,
     "username": "covconnectUser",
-    "password": "",
+    "password": "covconnect",
     "database": "covconnect"
   },
-  "secret": ""
+  "secret": "4056664e-8039-11ea-bc55-0242ac130003"
 }
